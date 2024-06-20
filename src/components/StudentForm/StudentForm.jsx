@@ -14,7 +14,7 @@ const StudentForm = ({ fetchStudents }) => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://127.0.0.1:3000/api/student/students",
+        `${process.env.REACT_APP_API_URL}/student/students`,
         { name, age, email, course },
         { headers: { Authorization: `Bearer ${token}` } }
       );
