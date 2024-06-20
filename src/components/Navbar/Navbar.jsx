@@ -1,12 +1,25 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+// src/components/Navbar/Navbar.jsx
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { FaUser } from "react-icons/fa";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const location = useLocation();
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+    setDropdownVisible(false); // Fechar dropdown ao fazer logout
+  };
 
   // Condição para exibir ou esconder a navbar
   if (location.pathname === "/" || location.pathname === "/register") {
@@ -26,8 +39,15 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-right">
-        <span className="navbar-user">{user?.username}</span>
-        <FaUser className="navbar-icon" />
+        <div className="navbar-user-info" onClick={toggleDropdown}>
+          <span className="navbar-user">{user?.username}</span>
+          <FaUser className="navbar-icon" />
+        </div>
+        <div className={`navbar-dropdown ${dropdownVisible ? "visible" : ""}`}>
+          <button onClick={handleLogout} className="logout-button">
+            Logout
+          </button>
+        </div>
       </div>
     </nav>
   );

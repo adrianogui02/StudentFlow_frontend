@@ -11,19 +11,22 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     // Carregar usuário e token do localStorage
     const savedToken = localStorage.getItem("token");
+    const savedUser = localStorage.getItem("user");
+
     if (savedToken) {
       try {
-        // Verificar se o token tem o formato correto (3 partes separadas por ".")
         if (savedToken.split(".").length === 3) {
           setToken(savedToken);
-          setUser(jwtDecode(savedToken));
+          setUser(savedUser);
         } else {
           console.warn("Invalid token format");
-          localStorage.removeItem("token"); // Remover o token inválido
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
         }
       } catch (error) {
         console.error("Failed to decode token:", error);
-        localStorage.removeItem("token"); // Remover o token inválido
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
       }
     }
   }, []);
@@ -37,11 +40,12 @@ export const AuthProvider = ({ children }) => {
           password,
         }
       );
-      const { token } = response.data;
+      const { token, user } = response.data;
       if (token) {
         setToken(token);
-        setUser(jwtDecode(token));
+        setUser(user);
         localStorage.setItem("token", token);
+        localStorage.setItem("user", user);
       } else {
         console.error("No token returned from login response");
       }
@@ -54,6 +58,8 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     setUser(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    console.log("Logout bem-sucedido. Token e usuário removidos.");
   };
 
   return (

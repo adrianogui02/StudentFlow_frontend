@@ -1,3 +1,6 @@
+/* src/components/Navbar/Navbar.css */
+
+/* Estilos básicos da navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -23,7 +26,8 @@
 
 .navbar-brand {
   color: white;
-  font-size: 24px;
+  font-size: 32px;
+  font-weight: 700;
   text-decoration: none;
 }
 
@@ -35,21 +39,132 @@
 .navbar-link {
   margin: 0 10px;
   color: white;
-  text-decoration: none;
   font-size: 18px;
+  transition: color ease 0.3s, font-size ease 0.2s;
+}
+
+.navbar-link:hover {
+  color: #9a41bd;
+  font-size: 19px;
 }
 
 .navbar-right {
   flex: 1;
   justify-content: flex-end;
+  position: relative; /* Para que o dropdown seja posicionado relativamente à navbar */
+}
+
+.navbar-user-info {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  background-color: #515458;
+  border-radius: 5px;
 }
 
 .navbar-user {
   margin-right: 10px;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .navbar-icon {
   font-size: 24px;
   color: white;
+  margin-left: 10px;
+}
+
+/* Dropdown initially hidden */
+.navbar-dropdown {
+  display: none; /* Ocultar por padrão */
+  position: absolute;
+  top: 90%;
+  right: 0;
+  background-color: #515458;
+  padding: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 1001; /* Certifique-se de que o dropdown fica sobre outros elementos */
+}
+
+.navbar-dropdown.visible {
+  display: block; /* Mostrar quando visível */
+}
+
+.logout-button {
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 8px;
+  width: 100%;
+}
+
+.logout-button:hover {
+  color: #9a41bd;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .navbar-left,
+  .navbar-center,
+  .navbar-right {
+    flex: none;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .navbar-center {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .navbar-right {
+    margin-top: 10px;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .navbar-user-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .navbar-dropdown {
+    right: 10px; /* Ajustar o alinhamento do dropdown */
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand {
+    font-size: 24px;
+  }
+
+  .navbar-link {
+    font-size: 16px;
+  }
+
+  .navbar-user {
+    font-size: 16px;
+  }
+
+  .navbar-icon {
+    font-size: 20px;
+  }
+
+  .navbar-dropdown {
+    padding: 5px;
+    width: auto; /* Ajustar largura para caber melhor em telas pequenas */
+  }
+
+  .logout-button {
+    padding: 10px;
+  }
 }
