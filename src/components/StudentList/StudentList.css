@@ -1,0 +1,55 @@
+.student-list-container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.student-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.student-list-table th,
+.student-list-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.student-list-table th {
+  background-color: #f2f2f2;
+}
+
+.student-list-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.student-list-actions button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.student-list-actions .edit-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.student-list-actions .delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.student-list-actions .edit-button:hover {
+  background-color: #0056b3;
+}
+
+.student-list-actions .delete-button:hover {
+  background-color: #c82333;
+}

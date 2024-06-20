@@ -1,0 +1,88 @@
+/* src/styles/HomePage.css */
+
+.home-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: "Arial", sans-serif;
+  color: white;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  background-size: 400% 400%;
+  animation: GradientAnimation 15s ease infinite;
+}
+
+@keyframes GradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.introduction {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.intro-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  width: 250px;
+  transition: transform 0.3s;
+}
+
+.intro-item:hover {
+  transform: scale(1.05);
+}
+
+.intro-icon {
+  font-size: 50px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.intro-item h3 {
+  margin-top: 15px;
+  font-size: 22px;
+}
+
+.intro-item p {
+  margin-top: 10px;
+  font-size: 16px;
+}
