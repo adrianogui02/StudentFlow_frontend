@@ -12,7 +12,7 @@ const StudentsPage = () => {
   const fetchStudents = useCallback(async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:3000/api/student/students",
+        `${process.env.REACT_APP_API_URL}/student/students`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -35,9 +35,12 @@ const StudentsPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:3000/api/student/students/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/student/students/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       fetchStudents();
     } catch (error) {
       console.error("Failed to delete student", error);
