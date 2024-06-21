@@ -1,8 +1,9 @@
-// src/components/Navbar/Navbar.jsx
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { FaUser } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -19,6 +20,8 @@ const Navbar = () => {
     logout();
     navigate("/");
     setDropdownVisible(false); // Fechar dropdown ao fazer logout
+    // Emitir uma notificação de logout
+    toast.info("Logged Out Successful");
   };
 
   // Condição para exibir ou esconder a navbar

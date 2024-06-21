@@ -1,3 +1,5 @@
+// src/pages/Login/LoginPage.jsx
+
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -15,12 +17,16 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      login(username, password);
-      navigate("/home");
-      toast.success("Login successful!");
+      const response = await login(username, password);
+      if (response.success) {
+        toast.success("Login successful!");
+        navigate("/home");
+      } else {
+        toast.error("Login failed. Check your credentials.");
+      }
     } catch (error) {
       console.error("Login failed", error);
-      toast.error("Login failed. Check your credentials.");
+      toast.error("An unexpected error occurred during login.");
     }
   };
 
