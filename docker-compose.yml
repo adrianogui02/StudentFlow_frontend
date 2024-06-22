@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  frontend:
+    build:
+      context: .  # Use o diretório atual como contexto de build
+    container_name: studentflow_frontend
+    ports:
+      - "3000:80"  # Mapeia a porta 80 do container para a porta 3000 no host
+    volumes:
+      - .:/usr/src/app  # Para desenvolvimento ao vivo (hot-reload)
+      - /usr/src/app/node_modules  # Ignora a pasta node_modules do host
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Para habilitar hot-reload em Docker
+    env_file:
+      - .env  # Carrega variáveis de ambiente do arquivo .env
