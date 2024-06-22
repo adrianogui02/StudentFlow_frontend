@@ -4,7 +4,7 @@ Bem-vindo ao StudentFlow Frontend. Este projeto é a interface do usuário para 
 
 ## Stack utilizada
 
-**Back-end:** Front-end: React e Context API
+**Front-end:** Front-end: React e Context API
 
 ## Funcionalidades
 
