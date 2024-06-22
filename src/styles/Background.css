@@ -1,0 +1,40 @@
+/* src/styles/Background.css */
+
+/* Fundo animado fixo cobrindo apenas a tela visível */
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #aa4b6b, #3b8d99);
+  background-size: 150% 150%;
+  animation: gradientBG 6s ease infinite;
+  z-index: -1;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Container que permite a rolagem */
+.scrollable-content {
+  position: relative;
+  z-index: 0; /* Conteúdo acima do fundo */
+  overflow: auto; /* Permitir rolagem */
+}
+
+/* Garantir que o conteúdo preencha a altura total em telas grandes */
+.full-height {
+  min-height: calc(
+    100vh - 50px
+  ); /* Ajuste se precisar compensar pela navbar ou outros elementos fixos */
+}
