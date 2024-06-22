@@ -1,29 +1,32 @@
+// src/pages/Login/LoginPage.jsx
+
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-toastify"; // Importando toast
 import "./LoginPage.css";
 import "../../styles/Background.css"; // Importa o fundo animado
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/user/login`,
-        { username, password }
-      );
-      const { token } = response.data;
-      localStorage.setItem("token", token);
-      navigate("/home");
-      toast.success("Login successful!");
+      const response = await login(username, password);
+      if (response.success) {
+        toast.success("Login Successful");
+        navigate("/home");
+      } else {
+        toast.error("Login failed. Check your credentials");
+      }
     } catch (error) {
       console.error("Login failed", error);
-      toast.error("Login failed. Check your credentials.");
+      toast.error("An unexpected error occurred during login");
     }
   };
 

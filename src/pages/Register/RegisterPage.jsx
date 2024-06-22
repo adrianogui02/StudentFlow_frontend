@@ -17,11 +17,11 @@ const RegisterPage = () => {
         username,
         password,
       });
-      toast.success("Registration successful! Please login.");
+      toast.success("Registration Successful. Please Login");
       navigate("/");
     } catch (error) {
       console.error("Registration failed", error);
-      toast.error("Registration failed. User may already exist.");
+      toast.error("Registration Failed. User may already exist");
     }
   };
 

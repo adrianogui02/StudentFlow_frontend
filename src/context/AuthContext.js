@@ -1,3 +1,5 @@
+// src/context/AuthContext.js
+
 import React, { createContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
@@ -9,21 +11,19 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    // Carregar usuário e token do localStorage
     const savedToken = localStorage.getItem("token");
     if (savedToken) {
       try {
-        // Verificar se o token tem o formato correto (3 partes separadas por ".")
         if (savedToken.split(".").length === 3) {
           setToken(savedToken);
           setUser(jwtDecode(savedToken));
         } else {
           console.warn("Invalid token format");
-          localStorage.removeItem("token"); // Remover o token inválido
+          localStorage.removeItem("token");
         }
       } catch (error) {
         console.error("Failed to decode token:", error);
-        localStorage.removeItem("token"); // Remover o token inválido
+        localStorage.removeItem("token");
       }
     }
   }, []);
@@ -32,21 +32,21 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/user/login`,
-        {
-          username,
-          password,
-        }
+        { username, password }
       );
-      const { token } = response.data;
+      const { token, user } = response.data;
       if (token) {
         setToken(token);
-        setUser(jwtDecode(token));
+        setUser(user); // Set the user directly
         localStorage.setItem("token", token);
+        return { success: true }; // Retornar sucesso
       } else {
-        console.error("No token returned from login response");
+        return { success: false };
       }
     } catch (error) {
       console.error("Login failed", error);
+
+      return { success: false }; // Retornar falha
     }
   };
 
