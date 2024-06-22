@@ -30,7 +30,6 @@
   position: relative;
   z-index: 0; /* Conteúdo acima do fundo */
   overflow: auto; /* Permitir rolagem */
-  padding: 20px; /* Ajuste de padding para evitar sobreposição com a navbar */
 }
 
 /* Garantir que o conteúdo preencha a altura total em telas grandes */

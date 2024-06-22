@@ -19,14 +19,14 @@ const LoginPage = () => {
     try {
       const response = await login(username, password);
       if (response.success) {
-        toast.success("Login successful!");
+        toast.success("Login Successful");
         navigate("/home");
       } else {
-        toast.error("Login failed. Check your credentials.");
+        toast.error("Login failed. Check your credentials");
       }
     } catch (error) {
       console.error("Login failed", error);
-      toast.error("An unexpected error occurred during login.");
+      toast.error("An unexpected error occurred during login");
     }
   };
 

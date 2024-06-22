@@ -1,8 +1,11 @@
+// src/pages/Students/StudentsPage.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext"; // Importar o contexto de autenticação
 import StudentList from "../../components/StudentList/StudentList";
 import StudentForm from "../../components/StudentForm/StudentForm";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../../styles/Background.css"; // Importa o fundo animado
 import "./StudentsPage.css"; // Estilos específicos para a página de estudantes
 
@@ -38,6 +41,7 @@ const StudentsPage = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setStudents(students.filter((student) => student.id !== id));
+      toast.success("Student Deleted Successfully");
     } catch (error) {
       console.error("Failed to delete student", error);
     }
@@ -57,23 +61,27 @@ const StudentsPage = () => {
   };
 
   return (
-    <div className="animated-background">
-      <div className="students-page">
-        <h1 className="students-title">Students Management</h1>
-        <div className="students-content">
-          <StudentForm
-            editingStudent={editingStudent}
-            onFormSubmit={handleFormSubmit}
-            clearEditing={() => setEditingStudent(null)}
-          />
-          <StudentList
-            students={students}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
+    <>
+      <div className="animated-background"></div>
+      <div className="scrollable-content">
+        <div className="students-page">
+          <h1 className="students-title">Students Management</h1>
+          <div className="students-content">
+            <StudentForm
+              editingStudent={editingStudent}
+              onFormSubmit={handleFormSubmit}
+              clearEditing={() => setEditingStudent(null)}
+              fetchStudents={fetchStudents}
+            />
+            <StudentList
+              students={students}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

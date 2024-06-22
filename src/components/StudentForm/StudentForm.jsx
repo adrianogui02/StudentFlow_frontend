@@ -35,8 +35,20 @@ const StudentForm = ({
     setCourse("");
   };
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validar email antes de enviar
+    if (!validateEmail(email)) {
+      toast.error("Invalid email address. Please enter a valid email.");
+      return;
+    }
+
     const studentData = { name, age, email, course };
 
     try {
@@ -60,8 +72,15 @@ const StudentForm = ({
       clearForm();
       fetchStudents();
     } catch (error) {
-      if (error.response && error.response.status === 409) {
-        toast.error("Email already exists. Please use a different email.");
+      if (error.response) {
+        if (error.response.status === 409) {
+          toast.error("Email already exists. Please use a different email.");
+        } else if (error.response.status === 400) {
+          const errorMessages = error.response.data.error;
+          errorMessages.forEach((message) => toast.error(message));
+        } else {
+          toast.error("Failed to submit student data. Please try again.");
+        }
       } else {
         toast.error("Failed to submit student data. Please try again.");
       }

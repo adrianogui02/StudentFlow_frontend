@@ -108,11 +108,17 @@
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding: 10px;
   }
 
-  .navbar-left,
+  .navbar-left {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
   .navbar-center,
   .navbar-right {
     flex: none;
@@ -127,18 +133,20 @@
 
   .navbar-right {
     margin-top: 10px;
-    justify-content: flex-end;
+    justify-content: center;
     width: 100%;
   }
 
   .navbar-user-info {
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   .navbar-dropdown {
-    right: 10px; /* Ajustar o alinhamento do dropdown */
     width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center; /* Centraliza o texto dentro do dropdown */
   }
 }
 
@@ -161,7 +169,8 @@
 
   .navbar-dropdown {
     padding: 5px;
-    width: auto; /* Ajustar largura para caber melhor em telas pequenas */
+    width: 100%; /* Ajustar largura para caber melhor em telas pequenas */
+    text-align: center; /* Centraliza o texto dentro do dropdown */
   }
 
   .logout-button {
