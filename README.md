@@ -11,7 +11,7 @@ Bem-vindo ao StudentFlow Frontend. Este projeto é a interface do usuário para 
 - Interface amigável para operações CRUD (Criar, Ler, Atualizar e Deletar) sobre estudantes.
 - Integração com a StudentFlow API para autenticação e autorização de usuários e logout.
 - Formulários e validações para entrada de dados do usuário.
-- Tema dark bom background dinâmico para uma melhor experiência do usuário.
+- Tema dark com background dinâmico para uma melhor experiência do usuário.
 - Navegação entre diferentes seções da aplicação.
 
 ## Instalação
