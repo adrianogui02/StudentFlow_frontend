@@ -1,6 +1,6 @@
 import React from "react";
 import "./HomePage.css";
-import { FaUserGraduate, FaCogs, FaTrophy } from "react-icons/fa"; // Importando ícones específicos
+import { FaUserGraduate, FaCogs, FaTrophy } from "react-icons/fa"; // Importando ícones
 
 const HomePage = () => {
   return (

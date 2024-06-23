@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
       const { token, user } = response.data;
       if (token) {
         setToken(token);
-        setUser(user); // Set the user directly
+        setUser(user); // Seta o user
         localStorage.setItem("token", token);
         return { success: true }; // Retornar sucesso
       } else {

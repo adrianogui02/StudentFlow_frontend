@@ -1,7 +1,6 @@
 // src/pages/Login/LoginPage.jsx
 
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-toastify"; // Importando toast
@@ -10,7 +9,7 @@ import "../../styles/Background.css"; // Importa o fundo animado
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login } = useAuth(); // Importa o metodo de login do AuthContext
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,6 +18,7 @@ const LoginPage = () => {
     try {
       const response = await login(username, password);
       if (response.success) {
+        // Verifica o login (sucesso), se não notifica erro(senha/usuário inválido)
         toast.success("Login Successful");
         navigate("/home");
       } else {

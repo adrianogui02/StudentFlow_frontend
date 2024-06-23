@@ -10,7 +10,7 @@ import "../../styles/Background.css"; // Importa o fundo animado
 import "./StudentsPage.css"; // Estilos específicos para a página de estudantes
 
 const StudentsPage = () => {
-  const { token } = useAuth(); // Obter o token do contexto de autenticação
+  const { token } = useAuth(); // Obter o token do AuthContext
   const [students, setStudents] = useState([]);
   const [editingStudent, setEditingStudent] = useState(null);
 
@@ -23,7 +23,7 @@ const StudentsPage = () => {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/student/students`,
         { headers: { Authorization: `Bearer ${token}` } }
-      );
+      ); // Requisição para a API(listar estudantes)
       setStudents(response.data);
     } catch (error) {
       console.error("Failed to fetch students", error);
@@ -39,7 +39,7 @@ const StudentsPage = () => {
       await axios.delete(
         `${process.env.REACT_APP_API_URL}/student/students/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
-      );
+      ); // Requisição para a API(deletar estudante)
       setStudents(students.filter((student) => student.id !== id));
       toast.success("Student Deleted Successfully");
     } catch (error) {

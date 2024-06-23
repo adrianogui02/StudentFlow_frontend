@@ -12,13 +12,13 @@
 
 .student-form {
   display: flex;
-  flex-wrap: wrap; /* Permitir que os inputs se reorganizem em múltiplas linhas se necessário */
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
 }
 
 .student-form input {
-  width: 20%; /* Ocupar 48% da largura do contêiner para permitir duas colunas com espaço entre */
+  width: 20%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #444;
@@ -28,7 +28,7 @@
 }
 
 .student-form input::placeholder {
-  color: #888; /* Cor dos placeholders em cinza claro */
+  color: #888;
 }
 
 .student-form button {
@@ -58,6 +58,6 @@
 
 @media (max-width: 600px) {
   .student-form input {
-    width: 100%; /* Inputs ocupam toda a largura em telas pequenas */
+    width: 100%;
   }
 }
