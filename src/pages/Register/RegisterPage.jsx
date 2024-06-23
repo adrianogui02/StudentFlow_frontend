@@ -16,7 +16,7 @@ const RegisterPage = () => {
       await axios.post(`${process.env.REACT_APP_API_URL}/user/register`, {
         username,
         password,
-      });
+      }); // Requisição para a API(registrar usuário)
       toast.success("Registration Successful. Please Login");
       navigate("/");
     } catch (error) {

@@ -11,7 +11,7 @@ const StudentForm = ({
   clearEditing,
   fetchStudents,
 }) => {
-  const { token } = useAuth();
+  const { token } = useAuth(); // Importando token do usuário logado
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
@@ -28,13 +28,14 @@ const StudentForm = ({
     }
   }, [editingStudent]);
 
+  // Limpar formulário
   const clearForm = () => {
     setName("");
     setAge("");
     setEmail("");
     setCourse("");
   };
-
+  // Verificar se o email é valido
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
@@ -57,23 +58,24 @@ const StudentForm = ({
           `${process.env.REACT_APP_API_URL}/student/students/${editingStudent.id}`,
           studentData,
           { headers: { Authorization: `Bearer ${token}` } }
-        );
+        ); // Requisição para a API (editar estudante)
         onFormSubmit({ ...studentData, id: editingStudent.id });
-        toast.success("Student updated successfully!");
+        toast.success("Student updated successfully!"); // Emitir mensagem
       } else {
         const response = await axios.post(
           `${process.env.REACT_APP_API_URL}/student/students`,
           studentData,
           { headers: { Authorization: `Bearer ${token}` } }
-        );
+        ); // Requisição para a API (adicionar estudante)
         onFormSubmit(response.data);
-        toast.success("Student added successfully!");
+        toast.success("Student added successfully!"); // Emitir mensagem
       }
       clearForm();
       fetchStudents();
     } catch (error) {
       if (error.response) {
         if (error.response.status === 409) {
+          // Verificação se o email já existe no banco
           toast.error("Email already exists. Please use a different email.");
         } else if (error.response.status === 400) {
           const errorMessages = error.response.data.error;

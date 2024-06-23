@@ -1,6 +1,3 @@
-/* src/components/Navbar/Navbar.css */
-
-/* Estilos básicos da navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -74,9 +71,8 @@
   margin-left: 10px;
 }
 
-/* Dropdown initially hidden */
 .navbar-dropdown {
-  display: none; /* Ocultar por padrão */
+  display: none;
   position: absolute;
   top: 90%;
   right: 0;
@@ -84,11 +80,11 @@
   padding: 10px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  z-index: 1001; /* Certifique-se de que o dropdown fica sobre outros elementos */
+  z-index: 1001;
 }
 
 .navbar-dropdown.visible {
-  display: block; /* Mostrar quando visível */
+  display: block;
 }
 
 .logout-button {
@@ -146,7 +142,7 @@
     width: 100%;
     box-sizing: border-box;
     padding: 10px;
-    text-align: center; /* Centraliza o texto dentro do dropdown */
+    text-align: center;
   }
 }
 
@@ -169,8 +165,8 @@
 
   .navbar-dropdown {
     padding: 5px;
-    width: 100%; /* Ajustar largura para caber melhor em telas pequenas */
-    text-align: center; /* Centraliza o texto dentro do dropdown */
+    width: 100%;
+    text-align: center;
   }
 
   .logout-button {

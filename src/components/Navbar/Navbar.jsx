@@ -8,7 +8,7 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuth(); // importando login e usuario logado
   const location = useLocation();
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -24,7 +24,7 @@ const Navbar = () => {
     toast.info("Logged Out Successful");
   };
 
-  // Condição para exibir ou esconder a navbar
+  // Condição para exibir ou esconder a navbar dependendo da página renderizada
   if (location.pathname === "/" || location.pathname === "/register") {
     return null;
   }
