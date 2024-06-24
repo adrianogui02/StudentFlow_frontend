@@ -1,29 +1,36 @@
-// src/pages/Students/StudentsPage.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useAuth } from "../../context/AuthContext"; // Importar o contexto de autenticação
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import StudentList from "../../components/StudentList/StudentList";
 import StudentForm from "../../components/StudentForm/StudentForm";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../../styles/Background.css"; // Importa o fundo animado
-import "./StudentsPage.css"; // Estilos específicos para a página de estudantes
+import "../../styles/Background.css";
+import "./StudentsPage.css";
 
 const StudentsPage = () => {
-  const { token } = useAuth(); // Obter o token do AuthContext
+  const { user, token, isLoading } = useAuth();
   const [students, setStudents] = useState([]);
   const [editingStudent, setEditingStudent] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchStudents();
-  }, []);
+    if (!isLoading) {
+      if (!token) {
+        navigate("/");
+      } else {
+        fetchStudents();
+      }
+    }
+  }, [token, navigate, isLoading]);
 
   const fetchStudents = async () => {
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/student/students`,
         { headers: { Authorization: `Bearer ${token}` } }
-      ); // Requisição para a API(listar estudantes)
+      );
       setStudents(response.data);
     } catch (error) {
       console.error("Failed to fetch students", error);
@@ -39,7 +46,7 @@ const StudentsPage = () => {
       await axios.delete(
         `${process.env.REACT_APP_API_URL}/student/students/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
-      ); // Requisição para a API(deletar estudante)
+      );
       setStudents(students.filter((student) => student.id !== id));
       toast.success("Student Deleted Successfully");
     } catch (error) {
@@ -57,8 +64,16 @@ const StudentsPage = () => {
     } else {
       setStudents([...students, updatedStudent]);
     }
-    setEditingStudent(null); // Limpar o formulário após a submissão
+    setEditingStudent(null);
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <div>Not authorized. Please log in.</div>;
+  }
 
   return (
     <>

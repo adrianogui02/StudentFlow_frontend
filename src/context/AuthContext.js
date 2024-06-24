@@ -9,23 +9,21 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     if (savedToken) {
       try {
-        if (savedToken.split(".").length === 3) {
-          setToken(savedToken);
-          setUser(jwtDecode(savedToken));
-        } else {
-          console.warn("Invalid token format");
-          localStorage.removeItem("token");
-        }
+        const decodedUser = jwtDecode(savedToken);
+        setToken(savedToken);
+        setUser(decodedUser);
       } catch (error) {
         console.error("Failed to decode token:", error);
         localStorage.removeItem("token");
       }
     }
+    setIsLoading(false);
   }, []);
 
   const login = async (username, password) => {
@@ -34,19 +32,20 @@ export const AuthProvider = ({ children }) => {
         `${process.env.REACT_APP_API_URL}/user/login`,
         { username, password }
       );
-      const { token, user } = response.data;
+      const { token } = response.data;
       if (token) {
+        const decodedUser = jwtDecode(token);
         setToken(token);
-        setUser(user); // Seta o user
+        setUser(decodedUser);
         localStorage.setItem("token", token);
-        return { success: true }; // Retornar sucesso
+        localStorage.setItem("user", JSON.stringify(decodedUser));
+        return { success: true };
       } else {
         return { success: false };
       }
     } catch (error) {
       console.error("Login failed", error);
-
-      return { success: false }; // Retornar falha
+      return { success: false };
     }
   };
 
@@ -54,10 +53,11 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     setUser(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
