@@ -63,7 +63,7 @@ Certifique-se de ter as seguintes ferramentas instaladas em seu sistema:
      docker-compose up -d --build
      ```
 
-     Isso irá iniciar o serviço do fronend na porta 3000
+     Isso irá iniciar o serviço do frontend na porta 3000
 
    - Verifique os logs dos containers:
 
